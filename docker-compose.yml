@@ -51,6 +51,8 @@ services:
                     - api.eelly.dev
                     - www.eelly.dev
                     - m.eelly.dev
+                    - manage.eelly.dev
+                    - uc.eelly.dev
     redis:
         image: redis
         ports:

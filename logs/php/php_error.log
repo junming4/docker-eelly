@@ -1,1 +1,14 @@
-[16-Aug-2017 14:36:23 Asia/Shanghai] PHP Parse error:  syntax error, unexpected end of file in /data/www/html/index.php on line 2
+[31-Aug-2017 13:51:48 Asia/Shanghai] PHP Fatal error:  Uncaught exception 'Whoops\Exception\ErrorException' with message 'error_log(/data/logs/testlogs/stat/log.20170831.txt): failed to open stream: No such file or directory' in /data/www/www.eelly.dev/eccore/misc/profiles.php:20
+Stack trace:
+#0 [internal function]: Whoops\Run->handleError(2, 'error_log(/data...', '/data/www/www.e...', 20, Array)
+#1 /data/www/www.eelly.dev/eccore/misc/profiles.php(20): error_log('eelly.dev 15041...', 3, '/data/logs/test...')
+#2 [internal function]: log_user_visitor()
+#3 {main}
+  thrown in /data/www/www.eelly.dev/eccore/misc/profiles.php on line 20
+[31-Aug-2017 13:52:40 Asia/Shanghai] PHP Fatal error:  Uncaught exception 'Whoops\Exception\ErrorException' with message 'error_log(/data/logs/testlogs/stat/log.20170831.txt): failed to open stream: No such file or directory' in /data/www/www.eelly.dev/eccore/misc/profiles.php:20
+Stack trace:
+#0 [internal function]: Whoops\Run->handleError(2, 'error_log(/data...', '/data/www/www.e...', 20, Array)
+#1 /data/www/www.eelly.dev/eccore/misc/profiles.php(20): error_log('eelly.dev 15041...', 3, '/data/logs/test...')
+#2 [internal function]: log_user_visitor()
+#3 {main}
+  thrown in /data/www/www.eelly.dev/eccore/misc/profiles.php on line 20

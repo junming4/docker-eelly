@@ -5,6 +5,8 @@ services:
         #image: mysql
         ports:
             - "3306:3306"
+        volumes:
+            - /Users/haikun/docker/docker-eelly/data/mysql-data:/var/lib/mysql
         #new PDO("mysql:host=db;dbname=oauth;charset=utf8","root","123456");
         networks:
             app-network:

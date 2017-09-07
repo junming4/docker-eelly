@@ -18,6 +18,7 @@ RUN set -xe && \
     apk add --no-cache --virtual .memcached-deps $MEMCACHED_DEPS 
 
 # add memcached extension
+RUN pecl install igbinary && docker-php-ext-enable igbinary 
 RUN apk update && apk add libmemcached-dev zlib-dev libgsasl-dev cyrus-sasl-dev \
     && cd /tmp \
     && pecl download memcached-2.2.0 \

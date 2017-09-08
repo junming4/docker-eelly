@@ -1,6 +1,6 @@
 FROM php:5.6.31-fpm-alpine
 
-WORKDIR /data/www
+WORKDIR /data/web
 
 ENV PHALCON_VERSION=3.2.1
 
@@ -43,7 +43,7 @@ RUN set -xe && \
     docker-php-ext-enable mongodb
 
 ADD php.ini /usr/local/etc/php/
-RUN chmod 777 /data/www/ -R
+RUN chmod 777 /data/web/ -R
 
 ENV RABBITMQ_VERSION v0.8.0
 ENV PHP_AMQP_VERSION v1.9.0

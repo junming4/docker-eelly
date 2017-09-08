@@ -6,7 +6,7 @@ services:
         ports:
             - "3306:3306"
         volumes:
-            - /Users/haikun/docker/docker-eelly/data/mysql-data:/var/lib/mysql
+            - ./data/mysql-data:/var/lib/mysql
         #new PDO("mysql:host=db;dbname=oauth;charset=utf8","root","123456");
         networks:
             app-network:
@@ -19,8 +19,8 @@ services:
     php5:
         build: ./php5-fpm
         volumes:
-            - /Users/haikun/site:/data/www
-            - /Users/haikun/docker/docker-eelly/logs:/data/logs
+            - /Users/haikun/site:/data/web
+            - ./logs:/data/logs
         links:
             - db
         networks:
@@ -28,9 +28,9 @@ services:
     php7:
         build: ./php7-fpm
         volumes:
-            - /Users/haikun/site:/data/www
-            - /Users/haikun/docker/docker-eelly/logs:/data/logs
-            - /Users/haikun/docker/docker-eelly/html:/data/www/html
+            - /Users/haikun/site:/data/web
+            - ./logs:/data/logs
+            - ./html:/data/web/html
         links:
             - db
         networks:
@@ -44,9 +44,9 @@ services:
             - php5
             - php7
         volumes:
-            - /Users/haikun/site:/data/www
-            - /Users/haikun/docker/docker-eelly/logs:/data/logs
-            - /Users/haikun/docker/docker-eelly/html:/data/www/html
+            - /Users/haikun/site:/data/web
+            - ./logs:/data/logs
+            - ./html:/data/web/html
         networks:
             app-network:
                 aliases:
@@ -97,8 +97,8 @@ services:
     node:
         build: ./nodejs
         volumes:
-             - /Users/haikun/docker/docker-eelly/html:/data/www/html
-             - /Users/haikun/site:/data/www
+             - ./html:/data/web/html
+             - /Users/haikun/site:/data/web
         networks:
             app-network:
 networks:

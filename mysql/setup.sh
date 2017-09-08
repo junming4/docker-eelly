@@ -21,8 +21,8 @@ echo `service mysql status`
 echo '2.开始导入数据....'
 
 #导入数据
-mysql < /mysql/oauth.sql
-
+mysql < /mysql/el_oauth.sql
+mysql < /mysql/el_service.sql
 echo '3.导入数据完毕....'
 
 sleep 3

@@ -1,6 +1,6 @@
 FROM php:7.1.7-fpm-alpine
 
-WORKDIR /data/www
+WORKDIR /data/web
 
 ENV PHALCON_VERSION=3.2.2
 
@@ -79,7 +79,7 @@ RUN apk add --no-cache --virtual .build-deps $PHPIZE_DEPS git cmake openssl-dev 
 	&& apk del .build-deps && rm -rf /tmp/*
 
 ADD php.ini /usr/local/etc/php/
-RUN chmod 777 /data/www/ -R
+RUN chmod 777 /data/web/ -R
 RUN pecl install igbinary && docker-php-ext-enable igbinary
 
 # GD extension

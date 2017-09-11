@@ -1,6 +1,6 @@
 FROM php:5.6.31-fpm-alpine
 
-WORKDIR /var/www
+WORKDIR /data/web
 
 ENV PHALCON_VERSION=3.2.1
 
@@ -15,9 +15,21 @@ RUN set -xe && \
 ENV MEMCACHED_DEPS zlib-dev libmemcached-dev cyrus-sasl-dev
 RUN set -xe && \
     apk add --no-cache libmemcached-libs zlib && \
-    apk add --no-cache --virtual .memcached-deps $MEMCACHED_DEPS && \
-    pecl install memcached-2.2.0 && \
-    docker-php-ext-enable memcached
+    apk add --no-cache --virtual .memcached-deps $MEMCACHED_DEPS 
+
+# add memcached extension
+RUN pecl install igbinary && docker-php-ext-enable igbinary 
+RUN apk update && apk add libmemcached-dev zlib-dev libgsasl-dev cyrus-sasl-dev \
+    && cd /tmp \
+    && pecl download memcached-2.2.0 \
+    && tar zxpf memcached-2.2.0.tgz \
+    && cd memcached-2.2.0 \
+    && phpize \
+    && ./configure --enable-memcached-igbinary --enable-memcached-json \
+    && make \
+    && make install \
+    && docker-php-ext-enable memcached \
+    && rm -rf /tmp/memcached-2.2.0*
 
 # add redis extension
 RUN set -xe && \
@@ -35,7 +47,7 @@ RUN set -xe && \
     docker-php-ext-enable mongodb
 
 ADD php.ini /usr/local/etc/php/
-
+RUN chmod 777 /data/web/ -R
 
 ENV RABBITMQ_VERSION v0.8.0
 ENV PHP_AMQP_VERSION v1.9.0
@@ -66,3 +78,11 @@ RUN apk upgrade --update && apk add \
 
 # add pdo_mysql extension
 RUN docker-php-ext-install pdo_mysql mysqli
+
+#RUN docker-php-ext-install bcmath 
+#RUN pecl install igbinary && docker-php-ext-enable igbinary 
+#RUN docker-php-source extract
+#RUN apk add --no-cache --virtual .build-deps $PHPIZE_DEPS git && \
+#    git clone --branch 2.2.0 https://github.com/php-memcached-dev/php-memcached.git /usr/src/php/ext/memcached/ \
+#    && docker-php-ext-configure memcached --enable-memcached-igbinary  \
+#    && docker-php-ext-install memcached

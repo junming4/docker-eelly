@@ -5,6 +5,8 @@ services:
         #image: mysql
         ports:
             - "3306:3306"
+        volumes:
+            - ./data/mysql-data:/var/lib/mysql
         #new PDO("mysql:host=db;dbname=oauth;charset=utf8","root","123456");
         networks:
             app-network:
@@ -17,8 +19,8 @@ services:
     php5:
         build: ./php5-fpm
         volumes:
-            - /Users/laraveljun/site:/data/www
-            - /Users/laraveljun/docker/docker-eelly/logs:/data/logs
+            - /Users/haikun/site:/data/web
+            - ./logs:/data/logs
         links:
             - db
         networks:
@@ -26,9 +28,9 @@ services:
     php7:
         build: ./php7-fpm
         volumes:
-            - /Users/laraveljun/site:/data/www
-            - /Users/laraveljun/docker/docker-eelly/logs:/data/logs
-            - /Users/laraveljun/docker/docker-eelly/html:/data/www/html
+            - /Users/haikun/site:/data/web
+            - ./logs:/data/logs
+            - ./html:/data/web/html
         links:
             - db
         networks:
@@ -42,21 +44,19 @@ services:
             - php5
             - php7
         volumes:
-            - /Users/laraveljun/site:/data/www
-            - /Users/laraveljun/docker/docker-eelly/logs:/data/logs
-            - /Users/laraveljun/docker/docker-eelly/html:/data/www/html
+            - /Users/haikun/site:/data/web
+            - ./logs:/data/logs
+            - ./html:/data/web/html
         networks:
             app-network:
                 aliases:
                     - api.eelly.dev
                     - www.eelly.dev
                     - m.eelly.dev
-                    - manage.eelly.dev
-                    - uc.eelly.dev
     redis:
         image: redis
         ports:
-                    - "6379:6379"
+          - "6379:6379"
         networks:
             app-network:
     redisCommander:
@@ -94,12 +94,12 @@ services:
             #http://api.eelly.dev:15672/#/
         networks:
             app-network:
-    #node:
-    #    build: ./nodejs
-    #    volumes:
-    #         - /Users/laraveljun/docker/docker-eelly/html:/data/www/html
-    #         - /Users/laraveljun/site:/data/www
-    #    networks:
-    #        app-network:
+    node:
+        build: ./nodejs
+        volumes:
+             - ./html:/data/web/html
+             - /Users/haikun/site:/data/web
+        networks:
+            app-network:
 networks:
     app-network:

@@ -53,6 +53,7 @@ services:
                     - api.eelly.dev
                     - www.eelly.dev
                     - m.eelly.dev
+                    - oauth.eelly.dev
     redis:
         image: redis
         ports:
@@ -101,5 +102,15 @@ services:
              - /Users/haikun/site:/data/web
         networks:
             app-network:
+    hugo:
+        #build: ./others/hugo
+        image: andthensome/alpine-hugo-git-bash
+        volumes:
+             - /Users/haikun/site:/data/web
+        #command: hugo server -d
+        ports:
+            - "1313:1313"
+        networks:
+            app-network:    
 networks:
     app-network:

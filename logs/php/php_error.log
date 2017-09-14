@@ -12,3 +12,17 @@ Stack trace:
 #2 [internal function]: log_user_visitor()
 #3 {main}
   thrown in /data/www/www.eelly.dev/eccore/misc/profiles.php on line 20
+[14-Sep-2017 14:14:00 Asia/Shanghai] PHP Fatal error:  Call to a member function find() on boolean in /data/web/manage.eelly.dev/app/membercard.app.php on line 93
+[14-Sep-2017 14:14:12 Asia/Shanghai] PHP Fatal error:  Call to a member function find() on boolean in /data/web/manage.eelly.dev/app/membercard.app.php on line 93
+[14-Sep-2017 14:14:14 Asia/Shanghai] PHP Fatal error:  Call to a member function find() on boolean in /data/web/manage.eelly.dev/app/membercard.app.php on line 93
+[14-Sep-2017 14:22:09 Asia/Shanghai] PHP Fatal error:  Call to a member function find() on boolean in /data/web/manage.eelly.dev/app/membercard.app.php on line 93
+[14-Sep-2017 14:22:13 Asia/Shanghai] PHP Fatal error:  Call to a member function find() on boolean in /data/web/manage.eelly.dev/app/membercard.app.php on line 93
+[14-Sep-2017 14:22:15 Asia/Shanghai] PHP Fatal error:  Call to a member function find() on boolean in /data/web/manage.eelly.dev/app/membercard.app.php on line 93
+[14-Sep-2017 14:22:19 Asia/Shanghai] PHP Fatal error:  Call to undefined function ServiceLib\mcrypt_get_block_size() in /data/web/manage.eelly.dev/includes/service/ServiceLib/DesCrypt.php on line 104
+[14-Sep-2017 14:22:25 Asia/Shanghai] PHP Fatal error:  Call to undefined function ServiceLib\mcrypt_get_block_size() in /data/web/manage.eelly.dev/includes/service/ServiceLib/DesCrypt.php on line 104
+[14-Sep-2017 14:22:26 Asia/Shanghai] PHP Fatal error:  Call to undefined function ServiceLib\mcrypt_get_block_size() in /data/web/manage.eelly.dev/includes/service/ServiceLib/DesCrypt.php on line 104
+[14-Sep-2017 14:22:28 Asia/Shanghai] PHP Fatal error:  Call to undefined function ServiceLib\mcrypt_get_block_size() in /data/web/manage.eelly.dev/includes/service/ServiceLib/DesCrypt.php on line 104
+[14-Sep-2017 14:25:00 Asia/Shanghai] PHP Fatal error:  Call to undefined function ServiceLib\mcrypt_get_block_size() in /data/web/manage.eelly.dev/includes/service/ServiceLib/DesCrypt.php on line 104
+[14-Sep-2017 14:43:59 Asia/Shanghai] PHP Fatal error:  Call to undefined function ServiceLib\mcrypt_get_block_size() in /data/web/manage.eelly.dev/includes/service/ServiceLib/DesCrypt.php on line 104
+[14-Sep-2017 14:44:00 Asia/Shanghai] PHP Fatal error:  Call to undefined function ServiceLib\mcrypt_get_block_size() in /data/web/manage.eelly.dev/includes/service/ServiceLib/DesCrypt.php on line 104
+[14-Sep-2017 14:44:01 Asia/Shanghai] PHP Fatal error:  Call to undefined function ServiceLib\mcrypt_get_block_size() in /data/web/manage.eelly.dev/includes/service/ServiceLib/DesCrypt.php on line 104

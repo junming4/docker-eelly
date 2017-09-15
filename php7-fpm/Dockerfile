@@ -118,3 +118,9 @@ RUN set -xe &&  wget -q -O - http://www.xunsearch.com/scws/down/scws-1.2.1.tar.b
     && docker-php-ext-enable scws 
 
 RUN rm -rf /tmp/* && rm -rf /var/cache/apk/*
+
+#需要安装性能测试站点才打开
+#RUN set -xe && git clone https://github.com/perftools/xhgui.git /data/xhgui.eelly.dev && \
+#    cd /data/xhgui.eelly.dev && php install.php
+#COPY xhgui_config.php /data/xhgui.eelly.dev/config/config.php
+

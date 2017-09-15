@@ -35,6 +35,10 @@ RUN apk update && apk add libmemcached-dev zlib-dev libgsasl-dev cyrus-sasl-dev 
 RUN set -xe && \
     pecl install redis-3.1.3 &&\
     docker-php-ext-enable redis
+# add redis extension
+RUN set -xe && \
+    pecl install xhprof-0.9.4 &&\
+    docker-php-ext-enable xhprof
 
 # add mongodb extension
 RUN set -xe && \

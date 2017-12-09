@@ -1,4 +1,4 @@
-FROM php:7.1.7-fpm-alpine
+FROM php:7.2.0-fpm-alpine3.6
 
 WORKDIR /data/web
 
@@ -39,7 +39,7 @@ RUN set -xe && \
 
 # add mongodb extension
 RUN set -xe && \
-    pecl install mongodb-1.2.9 && \
+    pecl install mongodb-1.3.4 && \
     docker-php-ext-enable mongodb
         
 ENV REDIS_VERSION=3.1.3
@@ -98,7 +98,7 @@ RUN set -ex \
         --with-freetype-dir=/usr/include/freetype2/freetype \
         --with-jpeg-dir=/usr/include \
         --with-png-dir=/usr/include \
-    && docker-php-ext-install soap gd bcmath zip opcache iconv mcrypt pdo pcntl sockets shmop xmlrpc \
+    && docker-php-ext-install soap gd bcmath zip opcache iconv  pdo pcntl sockets shmop xmlrpc \
     && rm -rf /var/cache/apk/* \
     && rm -rf /tmp/*
 

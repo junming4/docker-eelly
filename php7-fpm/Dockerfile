@@ -1,4 +1,4 @@
-FROM php:7.2.0-fpm-alpine3.6
+FROM php:7.1.7-fpm-alpine
 
 WORKDIR /data/web
 
@@ -29,7 +29,16 @@ RUN apk add --no-cache --virtual .build-deps wget \
 #直接 pecl 安装
 # add pdo_mysql extension
 RUN docker-php-ext-install pdo_mysql mysqli 
-RUN pecl install igbinary && docker-php-ext-enable igbinary
+#RUN pecl install igbinary && docker-php-ext-enable igbinary
+RUN set -xe \
+    && apk add --no-cache --virtual .build-deps autoconf g++ make pcre-dev re2c \
+    && curl -fsSL http://pecl.php.net/get/igbinary-2.0.5.tgz -o igbinary.tar.gz \
+    && mkdir -p /tmp/igbinary \
+    && tar -xf igbinary.tar.gz -C /tmp/igbinary --strip-components=1 \
+    && rm igbinary.tar.gz \
+    && docker-php-ext-configure /tmp/igbinary --enable-igbinary \
+    && docker-php-ext-install /tmp/igbinary \
+    && rm -r /tmp/igbinary
   
 # compile phalcon
 RUN set -xe && \
@@ -38,21 +47,39 @@ RUN set -xe && \
     docker-php-ext-enable phalcon
 
 # add mongodb extension
-RUN set -xe && \
-    pecl install mongodb-1.3.4 && \
-    docker-php-ext-enable mongodb
+RUN set -xe \
+    && apk add --no-cache --virtual .build-deps autoconf g++ make pcre-dev re2c \
+    && curl -fsSL http://pecl.php.net/get/mongodb-1.2.9.tgz -o mongodb.tar.gz \
+    && mkdir -p /tmp/mongodb \
+    && tar -xf mongodb.tar.gz -C /tmp/mongodb --strip-components=1 \
+    && rm mongodb.tar.gz \
+    && docker-php-ext-configure /tmp/mongodb --enable-mongodb \
+    && docker-php-ext-install /tmp/mongodb \
+    && rm -r /tmp/mongodb
+#RUN set -xe && \
+#    pecl install mongodb-1.3.4 && \
+#    docker-php-ext-enable mongodb
         
 ENV REDIS_VERSION=3.1.3
-RUN cd /tmp \
-    && pecl download redis-${REDIS_VERSION} \
-    && tar zxvf redis-${REDIS_VERSION}.tgz \
-    && cd redis-${REDIS_VERSION} \
-    && phpize \
-    && ./configure --enable-redis-igbinary \
-    && make \
-    && make install \
-    && docker-php-ext-enable redis \
-    && rm -rf /tmp/reids-${REDIS_VERSION}*
+RUN set -xe \
+    && apk add --no-cache --virtual .build-deps autoconf g++ make pcre-dev re2c \
+    && curl -fsSL http://pecl.php.net/get/redis-${REDIS_VERSION}.tgz -o redis.tar.gz \
+    && mkdir -p /tmp/redis \
+    && tar -xf redis.tar.gz -C /tmp/redis --strip-components=1 \
+    && rm redis.tar.gz \
+    && docker-php-ext-configure /tmp/redis --enable-redis --enable-redis-igbinary \
+    && docker-php-ext-install /tmp/redis \
+    && rm -r /tmp/redis
+# RUN cd /tmp \
+#     && pecl download redis-${REDIS_VERSION} \
+#     && tar zxvf redis-${REDIS_VERSION}.tgz \
+#     && cd redis-${REDIS_VERSION} \
+#     && phpize \
+#     && ./configure --enable-redis-igbinary \
+#     && make \
+#     && make install \
+#     && docker-php-ext-enable redis \
+#     && rm -rf /tmp/reids-${REDIS_VERSION}*
 
 #RUN pecl install memcached && docker-php-ext-enable memcached
 RUN docker-php-source extract
@@ -98,7 +125,7 @@ RUN set -ex \
         --with-freetype-dir=/usr/include/freetype2/freetype \
         --with-jpeg-dir=/usr/include \
         --with-png-dir=/usr/include \
-    && docker-php-ext-install soap gd bcmath zip opcache iconv  pdo pcntl sockets shmop xmlrpc \
+    && docker-php-ext-install soap gd bcmath zip opcache iconv pdo pcntl sockets shmop xmlrpc \
     && rm -rf /var/cache/apk/* \
     && rm -rf /tmp/*
 

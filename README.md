@@ -33,3 +33,4 @@ USE oauth;
 在 nginx/vhost新增站点配置文件,
 
 -错误日志在 logs 文件夹
+-需要在自己在data/logs/ 下面创建 nginx 文件，否则nginx启动不起

@@ -17,16 +17,16 @@ service mysql start
 
 sleep 3
 
-echo `service mysql status`
-echo '2.开始导入数据....'
+#echo `service mysql status`
+#echo '2.开始导入数据....'
 
 #导入数据
-mysql < /mysql/el_oauth.sql
-mysql < /mysql/el_service.sql
-echo '3.导入数据完毕....'
+#mysql < /mysql/el_oauth.sql
+#mysql < /mysql/el_service.sql
+#echo '3.导入数据完毕....'
 
-sleep 3
-echo `service mysql status`
+#sleep 3
+#echo `service mysql status`
 
 #重新设置mysql密码
 echo '4.开始修改密码....'

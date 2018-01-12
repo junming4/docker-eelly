@@ -95,7 +95,8 @@ RUN git clone https://github.com/tideways/php-profiler-extension.git /usr/src/ph
     && docker-php-ext-install tideways 
 
 RUN curl -sS https://getcomposer.org/installer | php \
-    && mv composer.phar /usr/local/bin/composer
+    && mv composer.phar /usr/local/bin/composer \
+    && /usr/local/bin/composer config -g repo.packagist composer https://packagist.phpcomposer.com
 
 RUN git clone https://github.com/swoole/swoole-src.git /usr/src/php/ext/swoole \
     && cd /usr/src/php/ext/swoole\
@@ -145,6 +146,10 @@ RUN set -xe &&  wget -q -O - http://www.xunsearch.com/scws/down/scws-1.2.1.tar.b
     && docker-php-ext-enable scws 
 
 RUN rm -rf /tmp/* && rm -rf /var/cache/apk/*
+
+RUN apk --no-cache add tzdata  && \
+    ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
+    echo "Asia/Shanghai" > /etc/timezone
 
 #需要安装性能测试站点才打开
 #RUN set -xe && git clone https://github.com/perftools/xhgui.git /data/xhgui.eelly.dev 

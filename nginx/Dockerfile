@@ -2,6 +2,10 @@ FROM alpine:3.4
 
 MAINTAINER Vincent Composieux <vincent.composieux@gmail.com>
 
+RUN apk --no-cache add tzdata  && \
+    ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
+    echo "Asia/Shanghai" > /etc/timezone
+
 RUN apk add --update nginx
 RUN rm -rf /var/cache/apk/* && rm -rf /tmp/*
 
@@ -23,6 +27,9 @@ COPY ssl.key /etc/nginx/
 
 COPY eelly.com.crt /etc/nginx/
 COPY eelly.com.key /etc/nginx/
+
+COPY www.eelly.dev.crt /etc/nginx/
+COPY www.eelly.dev.key /etc/nginx/
 
 COPY server.fastcgi.conf /etc/nginx/
 

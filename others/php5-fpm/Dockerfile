@@ -79,6 +79,10 @@ RUN apk upgrade --update && apk add \
 # add pdo_mysql extension
 RUN docker-php-ext-install pdo_mysql mysqli
 
+RUN apk --no-cache add tzdata  && \
+    ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
+    echo "Asia/Shanghai" > /etc/timezone
+
 #RUN docker-php-ext-install bcmath 
 #RUN pecl install igbinary && docker-php-ext-enable igbinary 
 #RUN docker-php-source extract

@@ -36,9 +36,8 @@ USE oauth;
 -需要在自己在data/logs/ 下面创建 nginx 文件，否则nginx启动不起
 
 问题
-    无法连接到外网
-    ```
+    无法连接到外网?
+    
         docker network ls
         docker network rm 4444
-        docker network create -d macvlan  --subnet=172.18.108.0/16 --gateway=172.18.108.254 -o parent=eth0.7 gitlab-net
-    ```    
+        docker network create -d macvlan  --subnet=172.18.108.0/16 --gateway=172.18.108.254 -o parent=eth0.7 gitlab-net    

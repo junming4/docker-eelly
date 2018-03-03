@@ -69,12 +69,12 @@ RUN apk add --no-cache --virtual .build-deps $PHPIZE_DEPS git cmake openssl-dev 
 	&& docker-php-ext-enable amqp \
 	&& apk del .build-deps && rm -rf /tmp/*
 
-RUN apk upgrade --update && apk add \
-  git \
-    && git clone https://github.com/tideways/php-profiler-extension.git /usr/src/php/ext/tideways \
-    && cd /usr/src/php/ext/tideways\
-    && docker-php-ext-install tideways \
-    && rm -rf /var/cache/apk/* 
+#RUN apk upgrade --update && apk add \
+#  git \
+#    && git clone https://github.com/tideways/php-profiler-extension.git /usr/src/php/ext/tideways \
+#    && cd /usr/src/php/ext/tideways\
+#    && docker-php-ext-install tideways \
+#    && rm -rf /var/cache/apk/*
 
 # add pdo_mysql extension
 RUN docker-php-ext-install pdo_mysql mysqli

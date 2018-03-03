@@ -1,13 +1,14 @@
-FROM alpine:3.4
-
-MAINTAINER Vincent Composieux <vincent.composieux@gmail.com>
+FROM alpine:latest
 
 RUN apk --no-cache add tzdata  && \
     ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
     echo "Asia/Shanghai" > /etc/timezone
 
-RUN apk add --update nginx
-RUN rm -rf /var/cache/apk/* && rm -rf /tmp/*
+RUN apk --update --no-cache add \
+      nginx \
+      nginx-mod-rtmp \
+      ffmpeg && \
+      rm -rf /var/cache/apk/*
 
 ADD nginx.conf /etc/nginx/
 ADD vhost/*.conf /etc/nginx/vhost/
